@@ -3,7 +3,7 @@
 //  Altere apenas BASE_URL para apontar para o seu servidor
 // ============================================================
 
-const BASE_URL = "medsync-production-e933.up.railway.app";
+const BASE_URL = "medsync-production-e933.up.railway.app/api";
 
 // ── Utilitário interno ──────────────────────────────────────
 async function request(method, path, body = null) {
