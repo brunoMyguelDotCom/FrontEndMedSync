@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedSync — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="dashboard.html" class="nav-logo">Med<span>Sync</span></a>
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="criacao.html">Criação</a>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <h1>Dashboard</h1>
+      <p>Visão geral do sistema em tempo real</p>
+    </div>
+
+    <!-- ── Consultas ── -->
+    <div
+      style="margin-bottom:.5rem; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text3)">
+      Consultas
+    </div>
+    <div class="stats-grid" id="stats-consultas">
+      <div class="stat-card" style="--accent:var(--cyan)">
+        <div class="stat-label">Total</div>
+        <div class="stat-value" id="s-consultas-total"><span class="skeleton" style="width:50px;height:32px;"></span>
+        </div>
+      </div>
+      <div class="stat-card" style="--accent:var(--amber)">
+        <div class="stat-label">Agendadas</div>
+        <div class="stat-value" id="s-consultas-agendadas"><span class="skeleton"
+            style="width:40px;height:32px;"></span></div>
+      </div>
+      <div class="stat-card" style="--accent:var(--green)">
+        <div class="stat-label">Concluídas</div>
+        <div class="stat-value" id="s-consultas-concluidas"><span class="skeleton"
+            style="width:40px;height:32px;"></span></div>
+      </div>
+      <div class="stat-card" style="--accent:var(--red)">
+        <div class="stat-label">Canceladas</div>
+        <div class="stat-value" id="s-consultas-canceladas"><span class="skeleton"
+            style="width:40px;height:32px;"></span></div>
+      </div>
+    </div>
+
+    <!-- ── Médicos + Pacientes ── -->
+    <div class="two-col">
+      <div>
+        <div
+          style="margin-bottom:.5rem; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text3)">
+          Médicos
+        </div>
+        <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="stat-card" style="--accent:var(--cyan)">
+            <div class="stat-label">Cadastrados</div>
+            <div class="stat-value" id="s-medicos-total"><span class="skeleton" style="width:40px;height:32px;"></span>
+            </div>
+          </div>
+          <div class="stat-card" style="--accent:var(--green)">
+            <div class="stat-label">Com agenda</div>
+            <div class="stat-value" id="s-medicos-com-disp"><span class="skeleton"
+                style="width:40px;height:32px;"></span></div>
+          </div>
+          <div class="stat-card" style="--accent:var(--amber)">
+            <div class="stat-label">Ocupados hoje</div>
+            <div class="stat-value" id="s-medicos-ocupados"><span class="skeleton"
+                style="width:40px;height:32px;"></span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          style="margin-bottom:.5rem; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text3)">
+          Pacientes
+        </div>
+        <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="stat-card" style="--accent:var(--cyan)">
+            <div class="stat-label">Cadastrados</div>
+            <div class="stat-value" id="s-pacientes-total"><span class="skeleton"
+                style="width:40px;height:32px;"></span></div>
+          </div>
+          <div class="stat-card" style="--accent:var(--green)">
+            <div class="stat-label">Ativos</div>
+            <div class="stat-value" id="s-pacientes-ativos"><span class="skeleton"
+                style="width:40px;height:32px;"></span></div>
+          </div>
+          <div class="stat-card" style="--accent:var(--red)">
+            <div class="stat-label">Inativos</div>
+            <div class="stat-value" id="s-pacientes-inativos"><span class="skeleton"
+                style="width:40px;height:32px;"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tabela Consultas ── -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-title">Consultas recentes</span>
+        <div style="display:flex;gap:.5rem;align-items:center">
+          <select class="form-select" id="filtro-status" style="width:auto;padding:.35rem .7rem;font-size:.75rem">
+            <option value="">Todos os status</option>
+            <option value="AGENDADA">Agendadas</option>
+            <option value="CONCLUIDA">Concluídas</option>
+            <option value="CANCELADA">Canceladas</option>
+          </select>
+          <button class="btn btn-ghost" id="btn-refresh" style="padding:.35rem .7rem">
+            ↺ Atualizar
+          </button>
+          <a href="criacao.html" class="btn btn-primary" style="padding:.35rem .7rem">+ Nova</a>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Paciente</th>
+              <th>Médico</th>
+              <th>Data / Hora</th>
+              <th>Status</th>
+              <th>Observações</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-consultas">
+            <tr>
+              <td colspan="7">
+                <div class="skeleton" style="height:36px;margin:.5rem 1rem"></div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7">
+                <div class="skeleton" style="height:36px;margin:.5rem 1rem"></div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7">
+                <div class="skeleton" style="height:36px;margin:.5rem 1rem"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Médicos / Pacientes tabelas ── -->
+    <div class="two-col">
+      <!-- Médicos -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-title">Médicos</span>
+          <a href="criacao.html" class="btn btn-ghost" style="padding:.35rem .7rem;font-size:.73rem">+ Cadastrar</a>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>CRM</th>
+                <th>Especialidade</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-medicos">
+              <tr>
+                <td colspan="5">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pacientes -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-title">Pacientes</span>
+          <a href="criacao.html" class="btn btn-ghost" style="padding:.35rem .7rem;font-size:.73rem">+ Cadastrar</a>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-pacientes">
+              <tr>
+                <td colspan="5">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Especialidades / Disponibilidades ── -->
+    <div class="two-col">
+
+      <!-- Especialidades -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-title">Especialidades</span>
+
+          <a href="criacao.html" class="btn btn-ghost" style="padding:.35rem .7rem;font-size:.73rem">
+            + Cadastrar
+          </a>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody id="tbody-especialidades">
+              <tr>
+                <td colspan="3">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="3">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Disponibilidades -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-title">Disponibilidades</span>
+
+          <a href="criacao.html" class="btn btn-ghost" style="padding:.35rem .7rem;font-size:.73rem">
+            + Cadastrar
+          </a>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Médico</th>
+                <th>Dia</th>
+                <th>Horário</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody id="tbody-disponibilidades">
+              <tr>
+                <td colspan="5">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="5">
+                  <div class="skeleton" style="height:30px;margin:.4rem 1rem"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <!-- Toast container -->
+    <div id="toast-container"></div>
+
+    <script type="module" src="dashboard.js"></script>
+</body>
+
+</html>

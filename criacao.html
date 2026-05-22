@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedSync — Criação</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="dashboard.html" class="nav-logo">Med<span>Sync</span></a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="criacao.html" class="active">Criação</a>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <h1>Criação de registros</h1>
+      <p>Preencha os campos e acompanhe o fluxo de dados em tempo real</p>
+    </div>
+
+    <div class="creation-layout">
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- FORMULÁRIOS -->
+      <!-- ═══════════════════════════════════════ -->
+
+      <div class="section-card creation-card">
+
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-tab="consulta">Consulta</button>
+          <button class="tab" data-tab="paciente">Paciente</button>
+          <button class="tab" data-tab="medico">Médico</button>
+          <button class="tab" data-tab="especialidade">Especialidade</button>
+          <button class="tab" data-tab="disponibilidade">Disponibilidade</button>
+        </div>
+
+        <!-- CONSULTA -->
+        <div class="tab-panel active" id="panel-consulta">
+          <form id="form-consulta" autocomplete="off">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Paciente</label>
+
+                <select class="form-select" name="pacienteId" id="sel-paciente" required>
+                  <option value="">Carregando...</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Médico</label>
+
+                <select class="form-select" name="medicoId" id="sel-medico" required>
+                  <option value="">Carregando...</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Data e Hora</label>
+
+              <input class="form-input" type="datetime-local" name="dataHora" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Observações</label>
+
+              <input class="form-input" type="text" name="observacoes" placeholder="Ex: paciente hipertenso" />
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              Agendar consulta →
+            </button>
+
+          </form>
+        </div>
+
+        <!-- PACIENTE -->
+        <div class="tab-panel" id="panel-paciente">
+
+          <form id="form-paciente" autocomplete="off">
+
+            <div class="form-group">
+              <label class="form-label">Nome completo</label>
+
+              <input class="form-input" type="text" name="nome" placeholder="João da Silva" required />
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label class="form-label">CPF</label>
+
+                <input class="form-input" type="text" name="cpf" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Telefone</label>
+
+                <input class="form-input" type="text" name="telefone" required />
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">E-mail</label>
+
+              <input class="form-input" type="email" name="email" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              Cadastrar paciente →
+            </button>
+
+          </form>
+        </div>
+
+        <!-- MÉDICO -->
+        <div class="tab-panel" id="panel-medico">
+
+          <form id="form-medico" autocomplete="off">
+
+            <div class="form-group">
+              <label class="form-label">Nome completo</label>
+
+              <input class="form-input" type="text" name="nome" required />
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label class="form-label">CRM</label>
+
+                <input class="form-input" type="text" name="crm" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Especialidade</label>
+
+                <select class="form-select" name="especialidadeId" id="sel-especialidade-medico" required>
+                  <option value="">Carregando...</option>
+                </select>
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              Cadastrar médico →
+            </button>
+
+          </form>
+        </div>
+
+        <!-- ESPECIALIDADE -->
+        <div class="tab-panel" id="panel-especialidade">
+
+          <form id="form-especialidade" autocomplete="off">
+
+            <div class="form-group">
+              <label class="form-label">Nome da especialidade</label>
+
+              <input class="form-input" type="text" name="nome" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              Criar especialidade →
+            </button>
+
+          </form>
+        </div>
+
+        <!-- DISPONIBILIDADE -->
+        <div class="tab-panel" id="panel-disponibilidade">
+
+          <form id="form-disponibilidade" autocomplete="off">
+
+            <div class="form-group">
+              <label class="form-label">Médico</label>
+
+              <select class="form-select" name="medicoId" id="sel-medico-disp" required>
+                <option value="">Carregando...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Dia da semana</label>
+
+              <select class="form-select" name="diaSemana" required>
+                <option value="">Selecione...</option>
+                <option value="MONDAY">Segunda-feira</option>
+                <option value="TUESDAY">Terça-feira</option>
+                <option value="WEDNESDAY">Quarta-feira</option>
+                <option value="THURSDAY">Quinta-feira</option>
+                <option value="FRIDAY">Sexta-feira</option>
+                <option value="SATURDAY">Sábado</option>
+                <option value="SUNDAY">Domingo</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label class="form-label">Início</label>
+
+                <input class="form-input" type="time" name="horarioInicio" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Fim</label>
+
+                <input class="form-input" type="time" name="horarioFim" required />
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              Registrar disponibilidade →
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- FLOW PANEL -->
+      <!-- ═══════════════════════════════════════ -->
+
+      <div class="flow-panel" id="flow-panel">
+
+        <div class="flow-panel-header">
+
+          <span class="flow-panel-title">
+            <span class="pulse-dot" id="pulse-dot"></span>
+            Fluxo de dados
+          </span>
+
+          <span class="flow-status" id="flow-status-label">
+            aguardando
+          </span>
+
+        </div>
+
+        <div class="flow-svg-wrap">
+
+          <svg id="flow-svg" viewBox="0 0 1500 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- EDGES -->
+
+<line class="flow-edge" id="e0"
+      x1="110" y1="120"
+      x2="250" y2="120" />
+
+<line class="flow-edge" id="e1"
+      x1="350" y1="120"
+      x2="490" y2="120" />
+
+<line class="flow-edge" id="e2"
+      x1="590" y1="120"
+      x2="730" y2="120" />
+
+<line class="flow-edge" id="e3"
+      x1="830" y1="120"
+      x2="970" y2="120" />
+
+<line class="flow-edge" id="e4"
+      x1="1070" y1="120"
+      x2="1270" y2="120" />
+
+            <!-- REQUEST -->
+
+            <g class="flow-node" id="n-request">
+
+              <rect x="20" y="88" width="100" height="64" rx="12" />
+
+              <text x="70" y="110" text-anchor="middle">
+                REQUEST
+              </text>
+
+              <text x="70" y="130" text-anchor="middle" font-size="9" id="n-request-sub">
+                POST /api
+              </text>
+
+            </g>
+
+            <!-- CONTROLLER -->
+
+            <g class="flow-node" id="n-controller">
+
+              <rect x="240" y="88" width="120" height="64" rx="12" />
+
+              <text x="300" y="110" text-anchor="middle">
+                CONTROLLER
+              </text>
+
+              <text x="300" y="130" text-anchor="middle" font-size="9" id="n-controller-sub">
+                @RestController
+              </text>
+
+            </g>
+
+            <!-- SERVICE -->
+
+            <g class="flow-node" id="n-service">
+
+              <rect x="480" y="88" width="120" height="64" rx="12" />
+
+              <text x="540" y="110" text-anchor="middle">
+                SERVICE
+              </text>
+
+              <text x="540" y="130" text-anchor="middle" font-size="9" id="n-service-sub">
+                regra negócio
+              </text>
+
+            </g>
+
+            <!-- VALIDATE -->
+
+            <g class="flow-node" id="n-validate">
+
+              <rect x="720" y="88" width="120" height="64" rx="12" />
+
+              <text x="780" y="110" text-anchor="middle">
+                VALIDAÇÃO
+              </text>
+
+              <text x="780" y="130" text-anchor="middle" font-size="9" id="n-validate-sub">
+                DTO / Rules
+              </text>
+
+            </g>
+
+            <!-- REPOSITORY -->
+
+            <g class="flow-node" id="n-repository">
+
+              <rect x="960" y="88" width="120" height="64" rx="12" />
+
+              <text x="1020" y="110" text-anchor="middle">
+                REPOSITORY
+              </text>
+
+              <text x="1020" y="130" text-anchor="middle" font-size="9" id="n-repository-sub">
+                JpaRepository
+              </text>
+
+            </g>
+
+            <!-- DATABASE -->
+            <g class="flow-node" id="n-database">
+              <rect x="1260" y="80" width="170" height="80" rx="18" />
+              <text x="1345" y="108" text-anchor="middle">DATABASE</text>
+              <text x="1345" y="132" text-anchor="middle" id="n-database-sub">
+                SQL / Hibernate
+              </text>
+            </g>
+
+            <line class="flow-edge" id="e5" x1="1345" y1="160" x2="1345" y2="180" />
+
+            <!-- RESPONSE -->
+            <g class="flow-node" id="n-response">
+              <rect x="1260" y="180" width="170" height="50" rx="18" />
+              <text x="1345" y="210" text-anchor="middle" id="n-response-text">
+                HTTP RESPONSE
+              </text>
+            </g>
+
+          </svg>
+
+        </div>
+
+        <div class="flow-log" id="flow-log"></div>
+
+        <div style="padding:0 1.2rem 1rem">
+          <pre class="response-box" id="response-box"></pre>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="criacao.js"></script>
+</body>
+
+</html>
